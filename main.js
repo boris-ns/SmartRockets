@@ -1,5 +1,6 @@
 const CANVAS_WIDTH  = 740;
 const CANVAS_HEIGHT = 480;
+const MUTATION_RATE = 1; //%
 
 let population;
 var target = {
@@ -17,7 +18,7 @@ function setup() {
 function draw() {
     background(50, 50, 50);
     population.tickAndDraw();
-    
+
     // Draw target
     fill(255, 0, 0);
     ellipse(target.x, target.y, 15, 15);
