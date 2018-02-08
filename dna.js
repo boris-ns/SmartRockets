@@ -1,7 +1,7 @@
 class DNA {
 
     constructor() {
-        this.genes = new Array(200);
+        this.genes = new Array(300);
         this.initGenes();
     }
 
