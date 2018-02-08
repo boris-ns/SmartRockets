@@ -18,7 +18,12 @@ class Rocket {
 
     calculateFitness() {
         // += because of punishemnt function when rocket gets out of canvas
-        this.fitness += Math.sqrt(Math.pow(this.position.x - target.x, 2) + Math.pow(this.position.y - target.y, 2));
+        this.fitness = 2000 - Math.sqrt(Math.pow(this.position.x - target.x, 2) + Math.pow(this.position.y - target.y, 2));
+
+        if (this.crashed) 
+            this.fitness *= 0.1;
+        else if (this.finished)
+            this.fitness += 100000;
     }
 
     // Physics (movement) for rocket
@@ -32,13 +37,12 @@ class Rocket {
 
         if (!this.finished && Math.pow(this.position.x - target.x, 2) + Math.pow(this.position.y - target.y, 2) <= Math.pow(target.r, 2)) {
             this.finished = true;
-            this.fitness += 10000; // can't be 0, because of division
             numOfHits++; // Global variable from main.js
         }
 
-        if (this.position.x < 0 || this.position.x > CANVAS_WIDTH || this.position.y > CANVAS_HEIGHT) {
+        if (this.position.x < 0 || this.position.x > CANVAS_WIDTH || 
+            this.position.y < 0 || this.position.y > CANVAS_HEIGHT) {
            this.crashed = true;
-           this.fitness *= 0.01;
         }
     }
 
