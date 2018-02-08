@@ -36,12 +36,9 @@ class Rocket {
             numOfHits++; // Global variable from main.js
         }
 
-        if (this.position.x < 0 || this.position.x > CANVAS_WIDTH ||
-            //this.position.y < 0 || this.position.y > CANVAS_HEIGHT) {
-             this.position.y > CANVAS_HEIGHT) {
-            
+        if (this.position.x < 0 || this.position.x > CANVAS_WIDTH || this.position.y > CANVAS_HEIGHT) {
            this.crashed = true;
-           this.fitness = 0;
+           this.fitness *= 0.01;
         }
     }
 

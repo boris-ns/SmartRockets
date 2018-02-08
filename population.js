@@ -74,7 +74,6 @@ class Population {
            let parent2 = this.acceptReject();
 
            newPopulation[i] = this.crossover(parent1, parent2);
-           console.log(parent1.fitness);
        }
 
        generationCounter++;                 // Global variable from main.js
@@ -86,7 +85,7 @@ class Population {
             let index = floor(random(this.MAX_POPULATION));
             let r = random(1);
 
-            if (r < this.rockets[index].fitness) {
+            if (r <= this.rockets[index].fitness) {
                 return this.rockets[index];
             }
         }
