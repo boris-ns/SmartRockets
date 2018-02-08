@@ -4,7 +4,6 @@ class Population {
         this.MAX_POPULATION = 100; 
         this.rockets = new Array(this.MAX_POPULATION);
         this.dnaCounter = 0;
-        this.timeToLive = 250;
     }
 
     generatePopulation() {
@@ -39,7 +38,6 @@ class Population {
 
     normalizeFitness() {
         let maxFitness = this.findMaxFitness();
-        console.log(maxFitness)
 
         for(let i = 0; i < this.rockets.length; ++i) {
             this.rockets[i].fitness /= float(maxFitness);
@@ -79,6 +77,7 @@ class Population {
            console.log(parent1.fitness);
        }
 
+       generationCounter++;                 // Global variable from main.js
        this.rockets = newPopulation;
     }
 
@@ -102,6 +101,12 @@ class Population {
                 this.calculateFitness();
                 this.generateNewPopulation();
                 this.setInitPositions();
+
+                if (numOfHits > bestNumOfHits) {
+                    bestNumOfHits = numOfHits;
+                }
+                numOfHits = 0; // Global variable from main.js
+
                 break;
             }
 
@@ -110,6 +115,5 @@ class Population {
         }
 
         this.dnaCounter++;
-        this.timeToLive--;
     }
 };

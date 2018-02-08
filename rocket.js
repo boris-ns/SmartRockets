@@ -33,6 +33,7 @@ class Rocket {
         if (!this.finished && Math.pow(this.position.x - target.x, 2) + Math.pow(this.position.y - target.y, 2) <= Math.pow(target.r, 2)) {
             this.finished = true;
             this.fitness += 10000; // can't be 0, because of division
+            numOfHits++; // Global variable from main.js
         }
 
         if (this.position.x < 0 || this.position.x > CANVAS_WIDTH ||
