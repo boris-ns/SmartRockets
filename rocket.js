@@ -46,14 +46,18 @@ class Rocket {
         }
     }
 
-    // @TODO: Figure out how to draw a triangle instead of rectangles, it'll look better
     draw() {
-        push();
+        let theta = this.velocity.heading() + radians(90);
         fill(255);
+       
+        push();
         translate(this.position.x, this.position.y);
-        rotate(this.velocity.heading());
-        rectMode(CENTER);
-        rect(0, 0, 25, 5);
+        rotate(theta);
+        beginShape();
+        vertex(0, -15);
+        vertex(-5, 15);
+        vertex(5, 15);
+        endShape(CLOSE);
         pop();
     }
 };
