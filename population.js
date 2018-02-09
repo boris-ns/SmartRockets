@@ -1,8 +1,7 @@
 class Population {
 
     constructor() {
-        this.MAX_POPULATION = 100; 
-        this.rockets = new Array(this.MAX_POPULATION);
+        this.rockets = new Array(POPULATION_SIZE);
         this.dnaCounter = 0;
     }
 
@@ -67,7 +66,7 @@ class Population {
 
     generateNewPopulation() {
        this.normalizeFitness();
-       let newPopulation = new Array(this.MAX_POPULATION);
+       let newPopulation = new Array(POPULATION_SIZE);
 
        for (let i = 0; i < newPopulation.length; ++i) {
            let parent1 = this.acceptReject();
@@ -82,7 +81,7 @@ class Population {
 
     acceptReject() {
         while (true) {
-            let index = floor(random(this.MAX_POPULATION));
+            let index = floor(random(POPULATION_SIZE));
             let r = random(1);
 
             if (r <= this.rockets[index].fitness) {
