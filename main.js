@@ -29,6 +29,10 @@ let paragCourse;
 let resetButton;
 let radioLevels;
 
+// Variables for creating new obstacles
+let startX;
+let startY;
+
 function setup() {
     createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -53,8 +57,9 @@ function initHtmlElements() {
     radioLevels.option("Level 1", 1);
     radioLevels.option("Level 2", 2);
     radioLevels.option("Level 3", 3);
+    radioLevels.option("Custom level", 4);
 
-    createP(""); // @Hack    
+    createP("You can create custom obstacles by clicking and dragging mouse across canvas.");  
     resetButton = createButton("Reset");
     resetButton.mousePressed(resetButtonAction);
 }
@@ -76,9 +81,27 @@ function setLevel() {
         createCourse2();
     } else if (radioLevels.value() == 3){ 
         createCourse3();
+    } else if (radioLevels.value() == 4) {
+        createCustomLevel();
     } else {
         createCourse1();
     }
+}
+
+/* These 2 functions are for creating new obstacles when user clicks and drags mouse over canvas.
+   With mousePressed we save starting position of obstacle, and with mouseReleased we save ending
+   positions and also create new obstacle. */
+function mousePressed() {
+    startX = mouseX;
+    startY = mouseY;
+}
+
+function mouseReleased() {
+    let endX = mouseX;
+    let endY = mouseY;
+    let width = endX - startX;
+    let height = endY - startY;
+    obstacles.push(new Obstacle(startX, startY, width, height));
 }
 
 /* Creates course. */
@@ -106,6 +129,10 @@ function createCourse3() {
     obstacles[2] = new Obstacle(200, 0, 20, 150);
     obstacles[3] = new Obstacle(400, 150, 20, 150);
     target.x = CANVAS_WIDTH - 60;
+}
+
+function createCustomLevel() {
+    obstacles = new Array();
 }
 
 /* Checks collision between every rocket and every obstacle. */
